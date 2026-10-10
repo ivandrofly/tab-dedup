@@ -8,7 +8,7 @@ It's a sibling of [bookmark-dedup](https://github.com/ivandrofly/bookmark-dedup)
 
 1. Open `chrome://extensions`.
 2. Turn on **Developer mode** (top right).
-3. Click **Load unpacked** and select this folder.
+3. Click **Load unpacked** and select this folder. You can also download `tab-dedup-<version>.zip` from [Releases](https://github.com/ivandrofly/tab-dedup/releases), extract it, and select the extracted folder.
 4. Pin the extension. The badge on its icon shows how many duplicate tabs are open right now.
 
 Open the popup by clicking the icon or with <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>. You can change the shortcut at `chrome://extensions/shortcuts`.
@@ -59,3 +59,10 @@ npm test
 ```
 
 This needs only Node 18+ and has no dependencies. CI runs it on Node 22 and 24.
+
+## Releasing
+
+1. Bump `version` in `manifest.json` (and `package.json`), then commit and push.
+2. Tag and push: `git tag -a vX.Y.Z -m vX.Y.Z && git push origin vX.Y.Z`
+
+The [Release workflow](.github/workflows/release.yml) runs the tests, checks that the tag matches `manifest.json`, builds a zip of the extension files only, and publishes the GitHub release. 0.x versions are published as pre-releases.
