@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tab Dedup</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="row-1">
+      <div class="brand">
+        <img src="icons/icon48.png" alt="" width="20" height="20">
+        <h1>Tab Dedup</h1>
+      </div>
+      <p id="summary" class="summary" aria-live="polite">Scanning…</p>
+      <button id="undo" type="button" class="btn" hidden title="Reopen the last closed batch (Ctrl+Z)">Undo</button>
+    </div>
+    <div class="row-2">
+      <div class="segmented" role="radiogroup" aria-label="Matching mode">
+        <label title="Ignores http/https, www., default ports, #fragment, trailing slash"><input type="radio" name="mode" value="normalized" checked> Normalized</label>
+        <label title="URLs must match character for character"><input type="radio" name="mode" value="exact"> Exact</label>
+      </div>
+      <input id="search" type="search" placeholder="Filter by URL, title or window" aria-label="Filter">
+      <button id="close-all" type="button" class="btn btn-danger" disabled>Close all duplicates</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="groups" aria-label="Duplicate groups"></section>
+    <p id="empty" class="empty" hidden></p>
+  </main>
+
+  <div id="toast" class="toast" role="status" hidden>
+    <span id="toast-text"></span>
+    <button id="toast-undo" type="button" class="btn-link">Undo</button>
+  </div>
+
+  <template id="group-tpl">
+    <article class="group">
+      <header class="group-head">
+        <code class="group-key"></code>
+        <span class="badge"></span>
+        <button type="button" class="btn btn-danger btn-sm close-others"></button>
+      </header>
+      <ul class="rows"></ul>
+    </article>
+  </template>
+
+  <template id="row-tpl">
+    <li class="row">
+      <label class="keep" title="Keep this tab">
+        <input type="radio">
+        <span>Keep</span>
+      </label>
+      <img class="favicon" alt="" width="16" height="16">
+      <div class="info">
+        <button type="button" class="title btn-link" title="Switch to this tab"></button>
+        <div class="url"></div>
+        <div class="meta">
+          <span class="window"></span>
+          <span class="flags"></span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-danger-outline btn-sm close">Close</button>
+    </li>
+  </template>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

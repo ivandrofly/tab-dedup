@@ -1,0 +1,10 @@
+{
+  "name": "tab-dedup",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome extension that finds duplicate open tabs and lets you choose which ones to close.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}
